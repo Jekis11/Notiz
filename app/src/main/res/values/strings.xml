@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Notiz</string>
+    <string name="notes">Meine Notiz</string>
+    <string name="notes_title">Notzen Titel</string>
+    <string name="notes_sub_title">Notiz Untertitel</string>
+    <string name="notes_desc">Geben Sie hier Notizen ein</string>
+    <string name="web_url">Geben Sie die Web-URL ein</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Absagen</string>
+    <string name="storage_permission_text">Diese App benötigt Zugriff auf Ihren Speicher.</string>
+    <string name="search">suchen Sie Ihre Notizen</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hallo blank fragment</string>
+</resources>

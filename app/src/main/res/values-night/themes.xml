@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Notiz" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ThemeOverlay.search" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!-- Text color -->
+        <item name="android:editTextColor">@color/ColorWhite</item>
+        <!-- Hint text color -->
+        <item name="android:textColorHint">@color/ColorGray</item>
+
+    </style>
+</resources>

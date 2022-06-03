@@ -6,12 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.notiz.Ent.Notiz
+import com.example.notiz.database.NotizDataBase
 import kotlinx.android.synthetic.main.fragment_create_notiz.*
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class CreateNotizFragment : BaseFragment() {
+
+    var currentDatum:String? = null
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +47,7 @@ class CreateNotizFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val cor = SimpleDateFormat("dd/M/yyyy hh:mm::ss")
-        val currentDatum = cor.format(Date())
+        currentDatum = cor.format(Date())
 
         tvDataTime.text = currentDatum
 
@@ -73,6 +78,19 @@ class CreateNotizFragment : BaseFragment() {
             Toast.makeText(context,"Notiz Beschreibung muss kann nicht null", Toast.LENGTH_SHORT).show()
         }
 
+
+        launch{
+            val Notiz = Notiz()
+
+            Notiz.title = ednotiztitel.text.toString()
+            Notiz.subtitle = ednotizSubTitel.text.toString()
+            Notiz.notizText = ednotizDesc.text.toString()
+            Notiz.datatime = tvDataTime.text.toString()
+
+            context?.let {
+                NotizDataBase.getDatabase(it).notizDao().insertNotiz(Notiz)
+            }
+        }
 
 
     }

@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class CreateNotizFragment : Fragment() {
+class CreateNotizFragment : BaseFragment() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +72,8 @@ class CreateNotizFragment : Fragment() {
         if (ednotizDesc.text.isNullOrEmpty()){
             Toast.makeText(context,"Notiz Beschreibung muss kann nicht null", Toast.LENGTH_SHORT).show()
         }
+
+
 
     }
 

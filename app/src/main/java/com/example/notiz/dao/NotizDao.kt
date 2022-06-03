@@ -11,8 +11,8 @@ interface NotizDao {
     val allNotes: List<Notiz>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertNotiz(note: Notiz)
+    suspend fun insertNotiz(note: Notiz)
 
     @Delete
-    fun  deleteNote(note: Notiz)
+    suspend fun  deleteNote(note: Notiz)
 }

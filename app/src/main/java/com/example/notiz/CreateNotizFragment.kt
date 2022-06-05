@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.notiz.Ent.Notiz
-import com.example.notiz.database.NotizDataBase
+import com.example.notiz.database.NotesDatabase
 import kotlinx.android.synthetic.main.fragment_create_notiz.*
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -88,7 +88,10 @@ class CreateNotizFragment : BaseFragment() {
             Notiz.datatime = tvDataTime.text.toString()
 
             context?.let {
-                NotizDataBase.getDatabase(it).notizDao().insertNotiz(Notiz)
+                NotesDatabase.getDatabase(it).notizDao().insertNotes(Notiz)
+                ednotiztitel.setText("")
+                ednotizSubTitel.setText("")
+                ednotizDesc.setText("")
             }
         }
 

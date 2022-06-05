@@ -1,31 +1,30 @@
 package com.example.notiz.database
-
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.notiz.Ent.Notiz
-import com.example.notiz.dao.NotizDao
+import com.example.notiz.dao.NoteDao
+
 
 @Database(entities = [Notiz::class], version = 1, exportSchema = false)
-abstract class NotizDataBase: RoomDatabase() {
+abstract class NotesDatabase : RoomDatabase() {
 
-
-    companion object{
-        var notizDataBase:NotizDataBase? = null
+    companion object {
+        var notesDatabase: NotesDatabase? = null
 
         @Synchronized
-        fun getDatabase(context: Context): NotizDataBase{
-            if(notizDataBase != null){
-                notizDataBase = Room.databaseBuilder(
-                    context,
-                    NotizDataBase::class.java,
-                    "notes.db"
+        fun getDatabase(context: Context): NotesDatabase {
+            if (notesDatabase == null) {
+                notesDatabase = Room.databaseBuilder(
+                    context
+                    , NotesDatabase::class.java
+                    , "notes.db"
                 ).build()
             }
-            return notizDataBase!!
+            return notesDatabase!!
         }
     }
 
-    abstract fun notizDao():NotizDao
+    abstract fun notizDao():NoteDao
 }

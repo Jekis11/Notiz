@@ -22,7 +22,7 @@
         android:layout_height="@dimen/_40sdp">
 
         <ImageView
-            android:id="@+id/imgMore"
+            android:id="@+id/imgmore"
             android:layout_gravity="center"
             android:layout_width="@dimen/_24sdp"
             android:layout_height="@dimen/_24sdp"
@@ -154,7 +154,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
             android:paddingEnd="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/etNoteTitle"
+            app:layout_constraintTop_toBottomOf="@id/ednotiztitel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/ColorWhite"
@@ -190,7 +190,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/etNoteTitle"
+            app:layout_constraintTop_toBottomOf="@id/ednotiztitel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/ColorWhite"
@@ -230,7 +230,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/etNoteTitle"
+            app:layout_constraintTop_toBottomOf="@id/ednotiztitel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/ColorWhite"
@@ -271,7 +271,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/etNoteTitle"
+            app:layout_constraintTop_toBottomOf="@id/ednotiztitel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/ColorWhite"

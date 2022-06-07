@@ -21,11 +21,11 @@ class NotizBottomSheetFragment : BottomSheetDialogFragment() {
 
     companion object {
         var noteId = -1
-        fun newInstance(id:Int): NotizBottomSheetFragment{
+        fun newInstance(): NotizBottomSheetFragment{
             val args = Bundle()
             val fragment = NotizBottomSheetFragment()
             fragment.arguments = args
-            noteId = id
+            // noteId = id
             return fragment
         }
     }
@@ -40,10 +40,11 @@ class NotizBottomSheetFragment : BottomSheetDialogFragment() {
 
         val behavior = param.behavior
 
+
         if (behavior is BottomSheetBehavior<*>){
-            behavior.setBottomSheetCallback(object  : BottomSheetBehavior.BottomSheetCallback(){
+            behavior.addBottomSheetCallback(object  : BottomSheetBehavior.BottomSheetCallback(){
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    TODO("Not yet implemented")
+
                 }
 
                 override fun onStateChanged(bottomSheet: View, newState: Int) {

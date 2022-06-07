@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.notiz.Ent.Notiz
 import com.example.notiz.database.NotesDatabase
-import com.example.notiz.util.NotizBottomSheetFragment
 import kotlinx.android.synthetic.main.fragment_create_notiz.*
 import kotlinx.android.synthetic.main.fragment_create_notiz.imgBack
 import kotlinx.android.synthetic.main.fragment_notes_bottom_sheet.*
@@ -27,7 +26,7 @@ class CreateNotizFragment : BaseFragment() {
 
     var selectedColor = "#171C26"
     var currentDatum:String? = null
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -62,7 +61,7 @@ class CreateNotizFragment : BaseFragment() {
 
         val cor = SimpleDateFormat("dd/M/yyyy hh:mm::ss")
         currentDatum = cor.format(Date())
-        colorView.setBackgroundColor(Color.parseColor(selectedColor))
+
 
         tvDataTime.text = currentDatum
 
@@ -74,12 +73,12 @@ class CreateNotizFragment : BaseFragment() {
         }
 
         imgBack.setOnClickListener {
-        requireActivity().supportFragmentManager.popBackStack()
+            replaceFragment(HomeFragment.newInstance(),false)
         }
 
-       imgMore.setOnClickListener{
-            var notizBottomSheetFragment = NotizBottomSheetFragment.newInstance()
-            notizBottomSheetFragment.show(requireActivity().supportFragmentManager,"Note Bottom Sheet Fragment")
+        imgMore.setOnClickListener{
+           // var noteBottomSheetFragment = NotizBottomSheetFragment.newInstance(noteId)
+           // noteBottomSheetFragment.show(requireActivity().supportFragmentManager,"Note Bottom Sheet Fragment")
         }
     }
 
@@ -129,7 +128,7 @@ class CreateNotizFragment : BaseFragment() {
 
     private val BroadcastReceiver : BroadcastReceiver = object: BroadcastReceiver(){
         override fun onReceive(p0: Context?, p1: Intent?) {
-            var actionColor = p1!!.getStringExtra("action")
+            var actionColor = p1!!.getStringExtra("actionColor")
             when(actionColor!!){
 
                 "Blue" -> {

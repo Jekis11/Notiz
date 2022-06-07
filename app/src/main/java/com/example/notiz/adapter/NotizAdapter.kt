@@ -27,12 +27,6 @@ class NotizAdapter(val arrList: List<Notiz>) :
         holder.itemView.tvdesc.text = arrList[position].notizText
         holder.itemView.tvDatumZeit.text = arrList[position].datatime
 
-        if (arrList[position].color !=null){
-            holder.itemView.cardView.setCardBackgroundColor(Color.parseColor(arrList[position].color))
-        }
-        else{
-            holder.itemView.cardView.setCardBackgroundColor(Color.parseColor(R.color.ColorLightBlack.toString()))
-        }
 
     }
 

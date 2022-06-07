@@ -14,18 +14,17 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_notes_bottom_sheet.*
 
-
-class NotizBottomSheetFragment : BottomSheetDialogFragment() {
+class NotizBottomAdapter : BottomSheetDialogFragment() {
     var selectedColor = "#171C26"
 
 
     companion object {
         var noteId = -1
-        fun newInstance(): NotizBottomSheetFragment{
+        fun newInstance(id:Int): NotizBottomAdapter{
             val args = Bundle()
-            val fragment = NotizBottomSheetFragment()
+            val fragment =NotizBottomAdapter()
             fragment.arguments = args
-            // noteId = id
+            noteId = id
             return fragment
         }
     }
@@ -40,11 +39,10 @@ class NotizBottomSheetFragment : BottomSheetDialogFragment() {
 
         val behavior = param.behavior
 
-
         if (behavior is BottomSheetBehavior<*>){
             behavior.addBottomSheetCallback(object  : BottomSheetBehavior.BottomSheetCallback(){
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
+                    TODO("Not yet implemented")
                 }
 
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -210,6 +208,10 @@ class NotizBottomSheetFragment : BottomSheetDialogFragment() {
             LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
             dismiss()
         }
-
     }
 }
+
+
+
+
+

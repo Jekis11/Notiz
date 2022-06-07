@@ -16,6 +16,7 @@ import java.util.*
 
 class CreateNotizFragment : BaseFragment() {
 
+    var selectedColor = "#171C26"
     var currentDatum:String? = null
     
     override fun onCreate(savedInstanceState: Bundle?) {

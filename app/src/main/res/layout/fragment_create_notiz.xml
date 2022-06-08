@@ -125,7 +125,6 @@
         android:visibility="gone"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
-
         android:layout_marginStart="@dimen/_10sdp"
         tools:ignore="MissingConstraints" />
 

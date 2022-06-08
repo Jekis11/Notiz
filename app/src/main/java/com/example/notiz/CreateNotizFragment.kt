@@ -191,7 +191,7 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
 
                 "Image" ->{
                     readStorageTask()
-                    // layoutImage.visibility = View.VISIBLE
+                   // layoutImage.visibility = View.GONE
                 }
 
                 "WebUrl" ->{

@@ -24,7 +24,7 @@ import java.io.Serializable
     @ColumnInfo(name ="notiz_text")
     var notizText: String? = null
 
-    @ColumnInfo(name ="img_url")
+    @ColumnInfo(name ="imgurl")
     var imgurl: String? = null
 
     @ColumnInfo(name ="web_link")

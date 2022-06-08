@@ -126,7 +126,8 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
                 ednotiztitel.setText("")
                 ednotizSubTitel.setText("")
                 ednotizDesc.setText("")
-                imgNote.visibility = View.GONE
+                //layoutImage.visibility = View.GONE
+                imgNote.visibility = View.VISIBLE
                 replaceFragment(HomeFragment.newInstance(),false)
                 //requireActivity().supportFragmentManager.popBackStack()
             }
@@ -226,6 +227,10 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
         return EasyPermissions.hasPermissions(requireContext(),android.Manifest.permission.READ_EXTERNAL_STORAGE)
     }
 
+    private fun hasWriteStoragePerm():Boolean{
+        return EasyPermissions.hasPermissions(requireContext(),android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    }
+
 
 
     private fun readStorageTask(){
@@ -275,7 +280,7 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
                         var bitmap = BitmapFactory.decodeStream(inputStream)
                         imgNote.setImageBitmap(bitmap)
                         imgNote.visibility = View.VISIBLE
-                        layoutImage.visibility = View.VISIBLE
+                        //layoutImage.visibility = View.VISIBLE
 
                         selectedImagePath = getPathFromUri(selectedImageUrl)!!
                     }catch (e:Exception){

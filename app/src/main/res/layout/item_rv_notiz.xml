@@ -30,8 +30,6 @@
                 app:riv_corner_radius_top_right="@dimen/_10sdp"/>
 
 
-
-
         <TextView
             android:id="@+id/tvtitel"
             android:layout_width="match_parent"

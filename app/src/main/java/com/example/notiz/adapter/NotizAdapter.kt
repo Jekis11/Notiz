@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notiz.Ent.Notiz
 import com.example.notiz.R
-import kotlinx.android.synthetic.main.fragment_create_notiz.view.*
 import kotlinx.android.synthetic.main.item_rv_notiz.view.*
 import kotlinx.android.synthetic.main.item_rv_notiz.view.imgNote
 
@@ -44,6 +43,14 @@ class NotizAdapter(val arrList: List<Notiz>) :
         }
         else{
             holder.itemView.imgNote.visibility = View.GONE
+        }
+
+        if(arrList[position].weblink != null){
+            holder.itemView.tvWebLink.text = arrList[position].weblink
+            holder.itemView.tvWebLink.visibility = View.VISIBLE
+        }
+        else{
+            holder.itemView.tvWebLink.visibility = View.GONE
         }
     }
 

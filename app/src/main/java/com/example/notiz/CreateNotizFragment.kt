@@ -10,6 +10,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +39,7 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
     private var READ_STORAGE_PERM = 123
     private var REQUEST_CODE_IMAGE= 456
     private var selectedImagePath= ""
+    private var webLink= ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,12 +88,30 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
 
         imgBack.setOnClickListener {
             replaceFragment(HomeFragment.newInstance(),false)
-          // requireActivity().supportFragmentManager.popBackStack()
+            //requireActivity().supportFragmentManager.popBackStack()
         }
 
         imgMore.setOnClickListener{
             var noteBottomSheetFragment = NotizBottomAdapter.newInstance(noteId)
             noteBottomSheetFragment.show(requireActivity().supportFragmentManager,"Note Bottom Sheet Fragment")
+        }
+
+        btnOk.setOnClickListener {
+            if (edWeblink.text.toString().trim().isNotEmpty()){
+                checkWebUrl()
+            }else{
+                Toast.makeText(requireContext(),"Url is Required",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        btnCancel.setOnClickListener {
+            layoutWebUrl.visibility = View.GONE
+
+        }
+
+        tvWebLink.setOnClickListener {
+            var intent = Intent(Intent.ACTION_VIEW,Uri.parse(edWeblink.text.toString()))
+            startActivity(intent)
         }
     }
 
@@ -101,15 +121,16 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
             Toast.makeText(context,"Notiz Titel ist erforderlich", Toast.LENGTH_SHORT).show()
         }
 
-        if (ednotizSubTitel.text.isNullOrEmpty()){
+       else  if (ednotizSubTitel.text.isNullOrEmpty()){
             Toast.makeText(context,"Notiz Untertitel ist erforderlich", Toast.LENGTH_SHORT).show()
         }
 
 
-        if (ednotizDesc.text.isNullOrEmpty()){
+       else if (ednotizDesc.text.isNullOrEmpty()){
             Toast.makeText(context,"Notiz Beschreibung muss kann nicht null", Toast.LENGTH_SHORT).show()
         }
 
+        else {
 
         launch{
             val Notiz = Notiz()
@@ -120,6 +141,7 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
             Notiz.datatime = currentDatum
             Notiz.color = selectedColor
             Notiz.imgurl = selectedImagePath
+            Notiz.weblink = webLink
 
             context?.let {
                 NotesDatabase.getDatabase(it).notizDao().insertNotes(Notiz)
@@ -128,13 +150,27 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
                 ednotizDesc.setText("")
                 //layoutImage.visibility = View.GONE
                 imgNote.visibility = View.VISIBLE
+                tvWebLink.visibility = View.GONE
                 replaceFragment(HomeFragment.newInstance(),false)
                 //requireActivity().supportFragmentManager.popBackStack()
             }
+          }
         }
 
 
     }
+
+   private fun checkWebUrl(){
+       if (Patterns.WEB_URL.matcher(edWeblink.text.toString()).matches()){
+           layoutWebUrl.visibility = View.GONE
+           edWeblink.isEnabled = false
+           webLink = edWeblink.text.toString()
+           tvWebLink.visibility = View.VISIBLE
+           tvWebLink.text = edWeblink.text.toString()
+       }else{
+           Toast.makeText(requireContext()," URL ist nicht valid", Toast.LENGTH_SHORT).show()
+       }
+   }
 
     fun replaceFragment(fragment: Fragment, istransition:Boolean){
         val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
@@ -142,7 +178,6 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
             fragmentTransition.setCustomAnimations(android.R.anim.slide_out_right,android.R.anim.slide_in_left)
         }
         fragmentTransition.add(R.id.frame_layout,fragment).addToBackStack(fragment.javaClass.simpleName).commit()
-
     }
 
     private val BroadcastReceiver : BroadcastReceiver = object: BroadcastReceiver(){
@@ -192,11 +227,12 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
 
                 "Image" ->{
                     readStorageTask()
-                   // layoutImage.visibility = View.GONE
+                    layoutWebUrl.visibility = View.GONE
+
                 }
 
                 "WebUrl" ->{
-                    layoutWebUrl.visibility = View.VISIBLE
+                  layoutWebUrl.visibility = View.VISIBLE
                 }
                 "DeleteNote" -> {
                     //delete note

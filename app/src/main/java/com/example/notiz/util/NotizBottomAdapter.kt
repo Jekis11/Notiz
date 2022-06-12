@@ -12,6 +12,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.notiz.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.fragment_create_notiz.*
 import kotlinx.android.synthetic.main.fragment_notes_bottom_sheet.*
 
 class NotizBottomAdapter : BottomSheetDialogFragment() {
@@ -196,7 +197,7 @@ class NotizBottomAdapter : BottomSheetDialogFragment() {
             LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
             dismiss()
         }
-        layoutWebUrl.setOnClickListener{
+        layoutwebUrl.setOnClickListener{
             val intent = Intent("bottom_sheet_action")
             intent.putExtra("action","WebUrl")
             LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)

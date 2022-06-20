@@ -56,7 +56,7 @@ class NotizAdapter() :
         }
 
             holder.itemView.cardView.setOnClickListener{
-                listener!!.onClicked(arrList[position])
+                listener!!.onClicked(arrList[position].id!!)
             }
 
     }
@@ -84,7 +84,7 @@ class NotizAdapter() :
 
 
     interface OnItemClickListener{
-        fun onClicked(notesModel:Notiz)
+        fun onClicked(notesId: Int)
     }
 
 }

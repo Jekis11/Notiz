@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.notiz.Ent.Notiz
 import com.example.notiz.adapter.NotizAdapter
 import com.example.notiz.database.NotesDatabase
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.launch
-
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : BaseFragment() {
 
@@ -56,12 +58,33 @@ class HomeFragment : BaseFragment() {
             }
         }
 
+
+        notesAdapter!!.setOnClickListener(onClicked)
+
         fabBtnCreateNotiz.setOnClickListener {
 
             replaceFragment(CreateNotizFragment.newInstance(),true)
 
         }
     }
+
+
+    private val onClicked = object : NotizAdapter.OnItemClickListener{
+        override fun onClicked(notesId: Int) {
+
+            var fragment : Fragment
+            var bundle = Bundle()
+            bundle.putString("edit","isEdit")
+            bundle.putInt("noteId",notesId)
+            fragment = CreateNotizFragment.newInstance()
+            fragment.arguments = bundle
+
+            replaceFragment(fragment,true)
+        }
+
+    }
+
+
 
     fun replaceFragment(fragment: Fragment, istransition:Boolean){
     val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()

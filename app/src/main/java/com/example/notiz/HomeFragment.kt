@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment() {
 
-
+    var notesAdapter: NotizAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +51,8 @@ class HomeFragment : BaseFragment() {
         launch {
             context?.let {
                 var notes = NotesDatabase.getDatabase(it).notizDao().getAllNotes()
-                recycler_view.adapter = NotizAdapter(notes)
+                notesAdapter!!.setData(notes)
+                recycler_view.adapter = notesAdapter
             }
         }
 

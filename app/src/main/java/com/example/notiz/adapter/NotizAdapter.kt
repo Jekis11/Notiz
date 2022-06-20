@@ -11,10 +11,12 @@ import com.example.notiz.R
 import kotlinx.android.synthetic.main.item_rv_notiz.view.*
 import kotlinx.android.synthetic.main.item_rv_notiz.view.imgNote
 
-class NotizAdapter(val arrList: List<Notiz>) :
+class NotizAdapter() :
     RecyclerView.Adapter<NotizAdapter.NotizViewHolder>() {
 
 
+    var arrList = ArrayList<Notiz>()
+    var listener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotizViewHolder {
         return NotizViewHolder(
@@ -52,6 +54,11 @@ class NotizAdapter(val arrList: List<Notiz>) :
         else{
             holder.itemView.tvWebLink.visibility = View.GONE
         }
+
+            holder.itemView.cardView.setOnClickListener{
+                listener!!.onClicked(arrList[position])
+            }
+
     }
 
     override fun getItemCount(): Int {
@@ -60,8 +67,24 @@ class NotizAdapter(val arrList: List<Notiz>) :
 
     }
 
+    fun setData(arrNotizList: List<Notiz>){
+
+        arrList = arrNotizList as ArrayList<Notiz>
+    }
+
+    fun setOnClickListener(Listener1:OnItemClickListener){
+
+        listener = Listener1
+
+    }
+
     class NotizViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
+    }
+
+
+    interface OnItemClickListener{
+        fun onClicked(notesModel:Notiz)
     }
 
 }

@@ -16,7 +16,7 @@ import kotlin.collections.ArrayList
 
 class HomeFragment : BaseFragment() {
 
-    var notesAdapter: NotizAdapter? = null
+    var notesAdapter: NotizAdapter = NotizAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +74,6 @@ class HomeFragment : BaseFragment() {
 
             var fragment : Fragment
             var bundle = Bundle()
-            bundle.putString("edit","isEdit")
             bundle.putInt("noteId",notesId)
             fragment = CreateNotizFragment.newInstance()
             fragment.arguments = bundle

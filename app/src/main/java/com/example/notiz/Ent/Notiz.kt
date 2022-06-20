@@ -32,7 +32,7 @@ import java.io.Serializable
 
 
     @ColumnInfo(name ="color")
-    var color: String? = null
+    var color:String? = null
 
     override fun toString(): String {
 

@@ -83,20 +83,32 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
                     ednotizSubTitel.setText(notes.subtitle)
                     ednotizDesc.setText(notes.notizText)
                     if(notes.imgurl != ""){
+                        selectedImagePath = notes.imgurl!!
+
                     imgNote.setImageBitmap(BitmapFactory.decodeFile(notes.imgurl))
                         imgNote.visibility = View.VISIBLE
+                        layoutomage.visibility = View.VISIBLE
+                        imgDelete.visibility = View.VISIBLE
 
                 }
                 else{
-                    imgNote.visibility = View.GONE
+                        imgNote.visibility = View.GONE
+                        layoutomage.visibility = View.GONE
+                        imgDelete.visibility = View.GONE
                 }
 
                     if(notes.weblink != ""){
+
+                        webLink = notes.weblink!!
                         tvWebLink.text = notes.weblink
-                        tvWebLink.visibility = View.VISIBLE
+                        layoutWebUrl.visibility = View.VISIBLE
+                        imgURLDelete.visibility = View.VISIBLE
+                        edWeblink.setText(notes.weblink)
+
                     }
                     else{
-                        tvWebLink.visibility = View.GONE
+                        layoutWebUrl.visibility = View.GONE
+                        imgURLDelete.visibility = View.GONE
                     }
 
                 }
@@ -118,8 +130,12 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
 
         imgDone.setOnClickListener {
             //speichern Notiz
+            if(noteId != -1){
+                updateNote()
+            }else{
+                speichern()
+            }
 
-            speichern()
         }
 
         imgBack.setOnClickListener {
@@ -132,6 +148,18 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
             noteBottomSheetFragment.show(requireActivity().supportFragmentManager,"Note Bottom Sheet Fragment")
         }
 
+        imgDelete.setOnClickListener {
+            layoutomage.visibility = View.GONE
+            selectedImagePath = ""
+        }
+
+        imgURLDelete.setOnClickListener {
+            webLink = ""
+            tvWebLink.visibility = View.GONE
+            layoutWebUrl.visibility = View.GONE
+            imgURLDelete.visibility = View.GONE
+        }
+
         btnOk.setOnClickListener {
             if (edWeblink.text.toString().trim().isNotEmpty()){
                 checkWebUrl()
@@ -140,8 +168,17 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
             }
         }
 
+
         btnCancel.setOnClickListener {
-            layoutWebUrl.visibility = View.GONE
+            if(noteId != -1){
+                tvWebLink.visibility = View.VISIBLE
+                layoutWebUrl.visibility = View.GONE
+            }else{
+                layoutWebUrl.visibility = View.GONE
+
+            }
+
+
 
         }
 
@@ -150,6 +187,37 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
             startActivity(intent)
         }
     }
+
+
+    private fun updateNote(){
+        launch{
+
+
+            context?.let {
+                var Notiz = NotesDatabase.getDatabase(it).notizDao().getSpecificNote(noteId)
+
+                Notiz.title = ednotiztitel.text.toString()
+                Notiz.subtitle = ednotizSubTitel.text.toString()
+                Notiz.notizText = ednotizDesc.text.toString()
+                Notiz.datatime = currentDatum
+                Notiz.color = selectedColor
+                Notiz.imgurl = selectedImagePath
+                Notiz.weblink = webLink
+
+                NotesDatabase.getDatabase(it).notizDao().updateNote(Notiz)
+                ednotiztitel.setText("")
+                ednotizSubTitel.setText("")
+                ednotizDesc.setText("")
+                layoutomage.visibility = View.GONE
+                imgNote.visibility = View.GONE
+                tvWebLink.visibility = View.GONE
+                replaceFragment(HomeFragment.newInstance(),false)
+                //requireActivity().supportFragmentManager.popBackStack()
+            }
+        }
+
+    }
+
 
     private fun speichern(){
 
@@ -184,8 +252,8 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
                 ednotiztitel.setText("")
                 ednotizSubTitel.setText("")
                 ednotizDesc.setText("")
-                //layoutImage.visibility = View.GONE
-                imgNote.visibility = View.VISIBLE
+                layoutomage.visibility = View.GONE
+                imgNote.visibility = View.GONE
                 tvWebLink.visibility = View.GONE
                 replaceFragment(HomeFragment.newInstance(),false)
                 //requireActivity().supportFragmentManager.popBackStack()
@@ -277,7 +345,7 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
 
 
                 else -> {
-                    layoutImage.visibility = View.GONE
+                    layoutomage.visibility = View.GONE
                     imgNote.visibility = View.GONE
                     layoutWebUrl.visibility = View.GONE
                     selectedColor = p1.getStringExtra("selectedColor")!!
@@ -352,7 +420,7 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
                         var bitmap = BitmapFactory.decodeStream(inputStream)
                         imgNote.setImageBitmap(bitmap)
                         imgNote.visibility = View.VISIBLE
-                        //layoutImage.visibility = View.VISIBLE
+                        layoutomage.visibility = View.VISIBLE
 
                         selectedImagePath = getPathFromUri(selectedImageUrl)!!
                     }catch (e:Exception){

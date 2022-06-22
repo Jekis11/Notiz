@@ -116,13 +116,31 @@
 
     </LinearLayout>
 
-
-    <ImageView
-        android:id="@+id/imgNote"
-        app:layout_constraintTop_toBottomOf="@id/l1"
+    <RelativeLayout
+        android:id="@+id/layoutomage"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_300sdp"
+        android:layout_height="wrap_content"
         android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/l1">
+
+
+        <ImageView
+            android:id="@+id/imgDelete"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_margin="@dimen/_15sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+
+            android:src="@drawable/ic_delete"
+            />
+
+
+         <ImageView
+        android:id="@+id/imgNote"
+        android:layout_width="match_parent"
+             android:visibility="gone"
+        android:layout_height="@dimen/_300sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_10sdp"
@@ -130,43 +148,64 @@
 
 
 
+    </RelativeLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:id="@+id/layoutWebUrl"
         android:background="@color/colorPrimary"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/imgNote"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:padding="@dimen/_10sdp"
+        android:layout_margin="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/layoutomage"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical">
 
-        >
-
-        <EditText
-            android:id="@+id/edWeblink"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
-            android:hint="@string/web_url"
-            android:textColor="@color/ColorWhite"
-            android:textColorHint="@color/ColorGray"
-            android:maxLines="1"
-            android:text="http://"
-            android:background="@null"
-            android:inputType="textMultiLine"
-            android:ellipsize="end"
-            android:textSize="@dimen/_12ssp"
-            android:fontFamily="@font/manrope_bold"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
-            />
-        
-        
+
+            <EditText
+                android:id="@+id/edWeblink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/web_url"
+                android:textColor="@color/ColorWhite"
+                android:textColorHint="@color/ColorGray"
+                android:maxLines="1"
+                android:layout_weight="1"
+                android:text="http://"
+                android:background="@null"
+                android:inputType="textMultiLine"
+                android:ellipsize="end"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/manrope_bold"
+
+                />
+
+            <ImageView
+                android:id="@+id/imgURlDelete"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:src="@drawable/ic_baseline_cancel_24"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:gravity="end"
+            android:layout_marginTop="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <Button
@@ -194,55 +233,71 @@
                 android:id="@+id/btnOk"/>
 
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutWebUrl"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/tvWebLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_weight="1"
+            android:autoLink="web"
+            android:ellipsize="end"
+            android:fontFamily="@font/manrope_bold"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/ColorGray"
+            android:textColorHint="@color/ColorGray"
+            android:textSize="@dimen/_12ssp"
+            android:visibility="visible"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/imgURLDelete"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/ic_delete"
+            android:visibility="gone" />
 
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvWebLink"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/layoutWebUrl"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/ColorGray"
-        android:textColorHint="@color/ColorGray"
-        android:visibility="gone"
-        android:autoLink="web"
-        android:ellipsize="end"
-        android:textSize="@dimen/_12ssp"
-        android:fontFamily="@font/manrope_bold"
-
-        />
-
 
 
     <EditText
         android:id="@+id/ednotizDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
         android:layout_margin="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/tvWebLink"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@null"
+        android:ellipsize="end"
+        android:fontFamily="@font/manrope_bold"
         android:hint="@string/notes_desc"
+        android:inputType="textMultiLine"
+        android:maxLines="1"
+        android:padding="@dimen/_5sdp"
         android:textColor="@color/ColorWhite"
         android:textColorHint="@color/ColorGray"
-        android:maxLines="1"
-        android:background="@null"
-        android:inputType="textMultiLine"
-        android:ellipsize="end"
         android:textSize="@dimen/_12ssp"
-        android:fontFamily="@font/manrope_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
+        tools:ignore="MissingConstraints" />
 
-        />
-    
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"

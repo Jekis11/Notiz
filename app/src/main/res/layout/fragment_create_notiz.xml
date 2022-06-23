@@ -262,7 +262,7 @@
             android:textColor="@color/ColorGray"
             android:textColorHint="@color/ColorGray"
             android:textSize="@dimen/_12ssp"
-            android:visibility="visible"
+            android:visibility="gone"
             tools:ignore="MissingConstraints" />
 
         <ImageView

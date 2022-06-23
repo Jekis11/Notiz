@@ -264,6 +264,15 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
 
     }
 
+    private fun deleteNote(){
+        launch {
+            context?.let{
+                NotesDatabase.getDatabase(it).notizDao().deleteSpecificNote(noteId)
+                replaceFragment(HomeFragment.newInstance(),false)
+            }
+        }
+    }
+
    private fun checkWebUrl(){
        if (Patterns.WEB_URL.matcher(edWeblink.text.toString()).matches()){
            layoutWebUrl.visibility = View.GONE
@@ -340,7 +349,7 @@ class CreateNotizFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,
                 }
                 "DeleteNote" -> {
                     //delete note
-                    //  deleteNote()
+                    deleteNote()
                 }
 
 
